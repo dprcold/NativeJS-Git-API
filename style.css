@@ -1,0 +1,265 @@
+/* Указываем box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Убираем внутренние отступы */
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+/* Убираем внешние отступы */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Выставляем основные настройки по-умолчанию для body */
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  width: 320px;
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat";
+  background-color: rgb(26, 25, 29);
+  min-width: 320px;
+  width: 100vw;
+  position: relative;
+  padding: 0;
+  box-sizing: border-box;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+ 
+}
+
+
+
+/* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Упрощаем работу с изображениями */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Указываем понятную периодичность в потоке данных у article*/
+article > * + * {
+  margin-top: 1em;
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-clear-button {
+    display: none;
+}
+
+/* Наследуем шрифты для инпутов и кнопок */
+input,
+button,
+textarea,
+select {
+font: inherit;
+}
+/* Удаляем все анимации и переходы для людей, которые предпочитай их не использовать */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+.main-section{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.search-block{
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+ width: 520px;
+ background-color: rgb(255, 255, 255);
+ border-radius: 5px;
+ -webkit-border-radius: 5px;
+ -moz-border-radius: 5px;
+ -ms-border-radius: 5px;
+ -o-border-radius: 5px;
+ padding-bottom: 10px;
+ position: relative;
+}
+
+#inputSearch{
+    margin-top: 10px;
+    width: 500px;
+    height: 60px;
+    font-size: 20px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    padding: 0 60px 0 20px;
+    transition: .4s;
+}
+#inputSearch::placeholder {
+  font-size: 20px;
+}
+
+#inputSearch:focus{
+  box-shadow: 0 0 0 .15vw rgb(109, 109, 109);
+}
+#inputSearch:hover{
+  box-shadow: 0 0 0 .15vw rgb(202, 202, 202);
+}
+
+#inputList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  height: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform-origin: top;
+  transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+#inputList.active {
+  height: 215px;
+  opacity: 1;
+  visibility: visible;
+}
+
+
+#inputList li {
+  padding: 8px 12px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  font-size: 18px;
+  max-height: 500px;
+  user-select: none;
+}
+
+#inputList li:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+.loader {
+  border: 4px solid rgba(0, 0, 0, .1);
+  border-left-color: transparent;
+  width: 36px;
+  height: 36px;
+  animation: spin89345 1s linear infinite;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  position: absolute;
+ right: 20px;
+ top: 25px;
+  display: none;
+}
+
+
+@keyframes spin89345 {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+ 
+
+#selectedRepositories{
+  margin-top: 50px;
+  width: 520px;
+  height: auto;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  overflow: hidden;
+
+  
+}
+
+#selectedRepositories li {
+  list-style: none;
+  height: 100px;
+  position: relative;
+  border-bottom: 1px solid #ccc;
+}
+#selectedRepositories li:hover {
+ 
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+#selectedRepositories p{
+ font-size: 18px;
+ margin-left: 15px;
+ padding-top: 5px;
+
+
+ 
+}
+.delete-button {
+ background-image: url(./img/delete.svg);
+ background-size: cover;
+ width: 17px;
+ height: 17px;
+ background-color: transparent;
+ border: none;
+ position: absolute;
+ top: 12px;
+ left: 492px;
+ cursor: pointer;
+}
+#selectedRepositories.active{
+  opacity: 1;
+  visibility: visible;
+  height: auto;
+}
+
