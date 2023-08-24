@@ -1,10 +1,13 @@
 
 let result = []
 let keyWords = ''
+
 async function fetchRepo() {
-    if (keyWords.trim() !== '') {
+    
+    let searchStr =  keyWords.trim()
+    if (searchStr) {
         showLoader()
-        let url = `https://api.github.com/search/repositories?q=${keyWords}+in:name`
+        let url = `https://api.github.com/search/repositories?q=${searchStr}+in:name`
         let response = await fetch(url)
         let responseData = await response.json()
         result = responseData.items
@@ -14,19 +17,25 @@ async function fetchRepo() {
         listResult([], searchResult)
     }
     hideLoader()
-    
+    console.log(result)
 }
 
 
 const debounce = (fn, debounceTime) => {
     let timer;
-    return function(...args){
-      clearTimeout(timer)
-      timer = setTimeout(() => {
-        fn.apply(this, args)
-      },debounceTime)
-    }
-}
+    let prevValue = "";
+  
+    return function() {
+      const currentValue = arguments[0];
+      if (currentValue !== prevValue) {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            fn.apply(this, arguments);
+        }, debounceTime);
+      }
+      prevValue = currentValue;
+    };
+  }
 
 const debouncedFetch = debounce(fetchRepo, 600)
 
@@ -35,6 +44,7 @@ const searchLine = document.querySelector('#inputSearch')
 
 searchLine.addEventListener('input', function(){
     keyWords = this.value
+    
     debouncedFetch()
 })
 
