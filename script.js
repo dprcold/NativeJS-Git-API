@@ -1,41 +1,41 @@
 
 let result = []
 let keyWords = ''
-
+let checkLastCall = ''
 async function fetchRepo() {
-    
-    let searchStr =  keyWords.trim()
+
+    let searchStr = keyWords.trim()
     if (searchStr) {
+        if(searchStr === checkLastCall){
+           
+            return
+        }
         showLoader()
         let url = `https://api.github.com/search/repositories?q=${searchStr}+in:name`
         let response = await fetch(url)
         let responseData = await response.json()
         result = responseData.items
         listResult(result, searchResult)
+        checkLastCall = searchStr
     } else {
         result = []
         listResult([], searchResult)
     }
     hideLoader()
     console.log(result)
+    console.log(checkLastCall)
 }
 
 
 const debounce = (fn, debounceTime) => {
     let timer;
-    let prevValue = "";
-  
-    return function() {
-      const currentValue = arguments[0];
-      if (currentValue !== prevValue) {
-        clearTimeout(timer);
-        timer = setTimeout(() => {
-            fn.apply(this, arguments);
-        }, debounceTime);
-      }
-      prevValue = currentValue;
-    };
-  }
+    return function(...args){
+      clearTimeout(timer)
+      timer = setTimeout(() => {
+        fn.apply(this, args)
+      },debounceTime)
+    }
+}
 
 const debouncedFetch = debounce(fetchRepo, 600)
 
